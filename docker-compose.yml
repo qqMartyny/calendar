@@ -1,0 +1,6 @@
+services:
+  calendar:
+    build: .
+    container_name: calendar-app
+    stdin_open: true
+    tty: true

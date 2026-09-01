@@ -1,0 +1,34 @@
+# Maven
+target/
+
+# Compiled class files
+*.class
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# IDE - VS Code
+.vscode/
+
+# IDE - Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment / local overrides
+.env
+*.local
+
+# Docker
+docker-compose.override.yml
