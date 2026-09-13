@@ -6,16 +6,19 @@ import com.ilyanin.calendar.model.Day;
 import com.ilyanin.calendar.model.Month;
 import com.ilyanin.calendar.model.MonthName;
 import com.ilyanin.calendar.model.WeekDay;
+import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CalendarFactory {
 
-    private final WeekDayCalculator weekDayCalculator;
+    private final CalendarSystem calendarSystem;
 
-    public CalendarFactory(WeekDayCalculator weekDayCalculator) {
-        this.weekDayCalculator = weekDayCalculator;
+    public CalendarFactory(CalendarSystem calendarSystem) {
+        this.calendarSystem = calendarSystem;
     }
 
     public Calendar create(CalendarKey key) {
@@ -23,7 +26,6 @@ public class CalendarFactory {
 
         WeekDay currentWeekDay = key.firstDayOfYear();
         for (MonthName monthName : MonthName.values()) {
-            int monthNumber = monthName.ordinal() + 1;
             int daysInMonth = monthName.lengthInDays(key.leapYear());
 
             List<Day> days = new ArrayList<>(daysInMonth);
@@ -39,12 +41,8 @@ public class CalendarFactory {
     }
 
     public CalendarKey resolveKey(int year) {
-        WeekDay firstDay = weekDayCalculator.dayOfWeek(year, 1, 1);
-        boolean leap = isLeapYear(year);
+        WeekDay firstDay = calendarSystem.dayOfWeek(LocalDate.of(year, 1, 1));
+        boolean leap = calendarSystem.isLeapYear(year);
         return new CalendarKey(firstDay, leap);
-    }
-
-    private boolean isLeapYear(int year) {
-        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
 }
