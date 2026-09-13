@@ -1,5 +1,6 @@
 package com.ilyanin.calendar.service;
 
+import com.ilyanin.calendar.exception.UnsupportedYearException;
 import com.ilyanin.calendar.model.Calendar;
 import com.ilyanin.calendar.model.CalendarKey;
 import com.ilyanin.calendar.model.WeekDay;
@@ -29,6 +30,10 @@ public class CalendarService {
     }
 
     public Calendar getCalendarFor(int year) {
+        if (!calendarSystem.isSupportedYear(year)) {
+            throw new UnsupportedYearException(year);
+        }
+
         CalendarKey key = calendarFactory.resolveKey(year);
 
         Calendar calendar = calendarStorage.findByKey(key)
@@ -44,6 +49,10 @@ public class CalendarService {
     }
 
     public WeekDay getWeekDay(LocalDate date) {
+        if (!calendarSystem.isSupportedYear(date.getYear())) {
+            throw new UnsupportedYearException(date.getYear());
+        }
+
         WeekDay weekDay = calendarSystem.dayOfWeek(date);
         log.info("Week day requested for date {}: {}", date, weekDay);
         return weekDay;

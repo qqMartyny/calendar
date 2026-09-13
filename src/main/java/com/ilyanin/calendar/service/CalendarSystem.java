@@ -9,4 +9,6 @@ public interface CalendarSystem {
     boolean isLeapYear(int year);
 
     WeekDay dayOfWeek(LocalDate date);
+
+    boolean isSupportedYear(int year);
 }
