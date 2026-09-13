@@ -2,5 +2,5 @@ services:
   calendar:
     build: .
     container_name: calendar-app
-    stdin_open: true
-    tty: true
+    ports:
+      - "8080:8080"

@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: calendar
+
+  datasource:
+    url: jdbc:h2:mem:calendar;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    hibernate:
+      # validate, а не update/create: схему создаёт Flyway,
+      # Hibernate только проверяет соответствие сущностей уже существующим таблицам
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  h2:
+    console:
+      # веб-консоль H2 для отладки: http://localhost:8080/h2-console
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.ilyanin.calendar: INFO

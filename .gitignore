@@ -32,3 +32,8 @@ Thumbs.db
 
 # Docker
 docker-compose.override.yml
+
+# H2 file-based DB artifacts
+*.db
+*.trace.db
+*.lock.db
