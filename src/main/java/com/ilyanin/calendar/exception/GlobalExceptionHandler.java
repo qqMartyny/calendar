@@ -34,6 +34,11 @@ public class GlobalExceptionHandler {
         return errorResponse(HttpStatus.BAD_REQUEST, "Request validation error");
     }
 
+    @ExceptionHandler(UnsupportedYearException.class)
+public ResponseEntity<Map<String, Object>> handleUnsupportedYear(UnsupportedYearException ex) {
+    return errorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+}
+
     private ResponseEntity<Map<String, Object>> errorResponse(HttpStatus status, String message) {
         Map<String, Object> body = Map.of(
                 "timestamp", Instant.now().toString(),
