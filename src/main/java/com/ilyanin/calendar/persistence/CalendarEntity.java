@@ -14,8 +14,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "calendars")
@@ -34,7 +34,7 @@ public class CalendarEntity {
 
     @OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @OrderBy("monthNumber ASC")
-    private List<MonthEntity> months = new ArrayList<>();
+    private Set<MonthEntity> months = new LinkedHashSet<>();
 
     protected CalendarEntity() {}
 
@@ -60,7 +60,7 @@ public class CalendarEntity {
         return leap;
     }
 
-    public List<MonthEntity> getMonths() {
+    public Set<MonthEntity> getMonths() {
         return months;
     }
 }
