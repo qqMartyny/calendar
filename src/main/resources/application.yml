@@ -10,9 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      # validate, а не update/create: схему создаёт Flyway,
-      # Hibernate только проверяет соответствие сущностей уже существующим таблицам
-      ddl-auto: validate
+      ddl-auto: none
     open-in-view: false
     properties:
       hibernate:
